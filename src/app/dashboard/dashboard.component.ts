@@ -1,21 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import * as d3 from 'd3';
-import { GaugeData, GaugeDataEntry } from './dashboard.component.types';
+import { Component } from '@angular/core';
+import { GaugeData } from './dashboard.component.types';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
-  // TODO: replace with actual width and height
-  private width = 400;
-  private height = 300;
-
-  private radius = Math.min(this.width, this.height) / 2;
-
-  // TODO: pass data as an input parameter
-  private data: GaugeData = [
+export class DashboardComponent {
+  public data: GaugeData = [
     {
       status: 'Operational',
       color: 'green',
@@ -41,88 +33,4 @@ export class DashboardComponent implements OnInit {
       ],
     },
   ];
-
-  private svg;
-
-  ngOnInit(): void {
-    const arc = d3
-      .arc<d3.PieArcDatum<GaugeDataEntry>>()
-      .innerRadius(this.radius * 0.67)
-      .outerRadius(this.radius - 1);
-
-    const pie = d3
-      .pie<GaugeDataEntry>()
-      .startAngle(-Math.PI / 2)
-      .endAngle(Math.PI / 2)
-      .padAngle(1 / this.radius)
-      .sort(null)
-      .value((d) => d.ids.length || 0);
-
-    const svg = d3
-      .select('figure#gauge_graph')
-      .append('svg')
-      .attr('width', this.width)
-      .attr('height', this.height)
-      .attr('viewBox', [
-        -this.width / 2,
-        -this.height / 2,
-        this.width,
-        this.height / 2,
-      ])
-      .attr('style', 'max-width: 100%; height: auto;');
-
-    svg
-      .append('g')
-      .selectAll()
-      .data(pie(this.data))
-      .join('path')
-      .style('cursor', 'pointer')
-      .attr('fill', (d) => d.data.color)
-      .attr('d', arc);
-
-    svg
-      .selectAll('path')
-      .on('mouseover', function () {
-        d3.select(this)
-          .transition()
-          .duration(150)
-          .ease(d3.easeLinear)
-          .attr('transform', 'scale(1.05)');
-      })
-      .on('mouseout', function () {
-        d3.select(this)
-          .transition()
-          .duration(150)
-          .ease(d3.easeLinear)
-          .attr('transform', 'scale(1)');
-      });
-
-    const legend = d3
-      .select('figure#gauge_legend')
-      .append('svg')
-      .attr('width', this.width)
-      .attr('height', '100px')
-      .attr('style', 'max-width: 100%; height: auto;')
-      .attr('viewBox', [0, 0, this.width, 100]);
-
-    const legendGroups = legend
-      .selectAll()
-      .data(this.data)
-      .join('g')
-      .attr('transform', (d, i) => {
-        return `translate(0, ${20 * i + 10 * i})`;
-      });
-
-    legendGroups
-      .append('rect')
-      .attr('width', 20)
-      .attr('height', 20)
-      .style('fill', (d: GaugeDataEntry) => d.color);
-
-    legendGroups
-      .append('text')
-      .text((d) => d.status)
-      .attr('x', 20 + 10)
-      .attr('y', 17);
-  }
 }

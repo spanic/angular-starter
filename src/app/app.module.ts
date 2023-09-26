@@ -7,9 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { MatCardModule } from '@angular/material/card';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GaugeStatusComponent } from './gauge-status/gauge-status.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent, DashboardComponent, GaugeStatusComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
