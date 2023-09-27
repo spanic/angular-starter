@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import {
-  GaugeData,
-  GaugeDataEntry,
-} from '../dashboard/dashboard.component.types';
+import { GaugeData } from '../dashboard/dashboard.component.types';
 
 /**
  * Base gauge graph parameters
@@ -15,7 +12,7 @@ const GAUGE_ARC_RADIUS_PX = Math.min(GAUGE_WIDTH_PX, GAUGE_HEIGHT_PX) / 2;
 /**
  * Base Legend parameters
  */
-const LEGEND_WIDTH_PX = 200;
+const LEGEND_WIDTH_PX = 400;
 const LEGEND_SQUARE_SIZE_PX = 20;
 const LEGEND_SQUARE_OFFSET_PX = 10;
 
@@ -26,7 +23,7 @@ const LEGEND_SQUARE_OFFSET_PX = 10;
 })
 export class GaugeStatusComponent implements OnInit {
   @Input()
-  data: GaugeData;
+  data: GaugeData[];
 
   ngOnInit(): void {
     this.drawGauge();
@@ -35,12 +32,12 @@ export class GaugeStatusComponent implements OnInit {
 
   private drawGauge(): void {
     const arc = d3
-      .arc<d3.PieArcDatum<GaugeDataEntry>>()
+      .arc<d3.PieArcDatum<GaugeData>>()
       .innerRadius(GAUGE_ARC_RADIUS_PX * 0.67)
       .outerRadius(GAUGE_ARC_RADIUS_PX - 1);
 
     const pie = d3
-      .pie<GaugeDataEntry>()
+      .pie<GaugeData>()
       .startAngle(-Math.PI / 2)
       .endAngle(Math.PI / 2)
       .padAngle(1 / GAUGE_ARC_RADIUS_PX)
@@ -117,7 +114,7 @@ export class GaugeStatusComponent implements OnInit {
       .append('rect')
       .attr('width', LEGEND_SQUARE_SIZE_PX)
       .attr('height', LEGEND_SQUARE_SIZE_PX)
-      .style('fill', (d: GaugeDataEntry) => d.color);
+      .style('fill', (d: GaugeData) => d.color);
 
     legendGroups
       .append('text')
