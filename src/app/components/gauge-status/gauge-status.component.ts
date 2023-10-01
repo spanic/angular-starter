@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { GaugeData } from '../dashboard/dashboard.component.types';
+import { GaugeData } from './gauge-status.model';
 
 /**
  * Base gauge graph parameters

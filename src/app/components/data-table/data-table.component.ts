@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridReadyEvent } from 'ag-grid-community';
-import { DeviceData } from '../dashboard/dashboard.component.types';
+import { DeviceData } from '../../models/device-data.model';
 
 @Component({
   selector: 'app-data-table',
