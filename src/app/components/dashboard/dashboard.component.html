@@ -1,14 +1,28 @@
-<div class="container dashboard__container">
+<div class="container py-3">
   <div class="row gy-4">
-    <div class="col-12 col-md-6 col-lg-4">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Gauge graph</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <app-gauge-status [data]="gaugeData"></app-gauge-status>
-        </mat-card-content>
-      </mat-card>
+    <div class="col-12 col-lg-4">
+      <div class="row gy-4">
+        <div class="col-md-6 col-lg-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Gauge graph</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <app-gauge-status [data]="gaugeData" />
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Edit device</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <app-edit-device class="mt-2" [device]="devices?.[0]" />
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </div>
     <div class="col-12 col-md-12 col-lg-8">
       <mat-card>
@@ -16,7 +30,7 @@
           <mat-card-title>Data table</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <app-data-table [data]="devicesData$ | async"></app-data-table>
+          <app-data-table class="mt-2" [data]="devices" />
         </mat-card-content>
       </mat-card>
     </div>

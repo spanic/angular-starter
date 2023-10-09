@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { combineLatest, interval, startWith, switchMap } from 'rxjs';
+import { StatusesData } from 'src/app/models/statuses-data.model';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { DeviceData } from '../../models/device-data.model';
 import { GaugeData } from '../gauge-status/gauge-status.model';
-import { StatusesData } from 'src/app/models/statuses-data.model';
-import { map } from 'd3';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,15 +39,23 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  public devicesData$: Observable<DeviceData[]>;
+  public devices: DeviceData[];
 
-  public statusesData$: Observable<StatusesData>;
+  private destroyRef = inject(DestroyRef);
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-    this.devicesData$ = this.dashboardService.fetchDevicesData();
-
-    this.statusesData$ = this.dashboardService.fetchStatusesData().pipe(map());
+    combineLatest([
+      this.dashboardService.fetchDevicesData(),
+      interval(1000).pipe(
+        startWith(0),
+        switchMap(() => this.dashboardService.fetchStatusesData())
+      ),
+    ])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(([devices, statuses]: [DeviceData[], StatusesData]) => {
+        this.devices = devices;
+      });
   }
 }

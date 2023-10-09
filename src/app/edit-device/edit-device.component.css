@@ -1,0 +1,8 @@
+:host {
+  display: block;
+}
+
+.edit-device-form {
+  display: flex;
+  flex-direction: column;
+}

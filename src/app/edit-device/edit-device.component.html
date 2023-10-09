@@ -1,0 +1,26 @@
+<form
+  class="edit-device-form"
+  [formGroup]="editDeviceForm"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>IP address</mat-label>
+    <input matInput formControlName="ipAddress" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="location" />
+  </mat-form-field>
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="!editDeviceForm.valid"
+  >
+    Submit
+  </button>
+</form>
