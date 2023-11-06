@@ -1,7 +1,6 @@
 interface GaugeData {
   status: string;
-  color: string;
-  ids: Array<string>;
+  qty: number;
 }
 
 export { GaugeData };

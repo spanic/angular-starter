@@ -1,13 +1,5 @@
 <ag-grid-angular
   class="ag-theme-material"
-  domLayout="autoHeight"
-  suppressCellFocus="true"
-  rowClass="data-table__row"
-  [columnDefs]="columnDefs"
-  [defaultColDef]="defaultColDef"
+  [gridOptions]="gridOptions"
   [rowData]="data"
-  [rowSelection]="'multiple'"
-  [animateRows]="true"
-  (gridReady)="onGridReady($event)"
->
-</ag-grid-angular>
+/>

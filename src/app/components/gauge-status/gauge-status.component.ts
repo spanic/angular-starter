@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { GAUGE_COLOR_CONFIG } from 'src/app/shared/gauge-color-config.token';
 import { GaugeData } from './gauge-status.model';
 
 /**
@@ -25,6 +26,8 @@ export class GaugeStatusComponent implements OnInit {
   @Input()
   data: GaugeData[];
 
+  constructor(@Inject(GAUGE_COLOR_CONFIG) private readonly colorConfig) {}
+
   ngOnInit(): void {
     this.drawGauge();
     this.drawLegend();
@@ -42,7 +45,7 @@ export class GaugeStatusComponent implements OnInit {
       .endAngle(Math.PI / 2)
       .padAngle(1 / GAUGE_ARC_RADIUS_PX)
       .sort(null)
-      .value((d) => d.ids.length || 0);
+      .value((d) => d.qty || 0);
 
     const svg = d3
       .select('figure#gauge_graph')
@@ -66,7 +69,7 @@ export class GaugeStatusComponent implements OnInit {
       .data(pie(this.data))
       .join('path')
       .style('cursor', 'pointer')
-      .attr('fill', (d) => d.data.color)
+      .attr('fill', (d) => this.colorConfig[d.data.status])
       .attr('d', arc);
 
     svg
@@ -114,7 +117,7 @@ export class GaugeStatusComponent implements OnInit {
       .append('rect')
       .attr('width', LEGEND_SQUARE_SIZE_PX)
       .attr('height', LEGEND_SQUARE_SIZE_PX)
-      .style('fill', (d: GaugeData) => d.color);
+      .style('fill', (d: GaugeData) => this.colorConfig[d.status]);
 
     legendGroups
       .append('text')

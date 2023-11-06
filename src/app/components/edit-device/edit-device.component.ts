@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { DeviceData } from '../models/device-data.model';
+import { DeviceData } from '../../models/device-data.model';
 
 @Component({
   selector: 'app-edit-device',
@@ -23,6 +23,7 @@ export class EditDeviceComponent {
 
   @Input()
   set device(device: DeviceData) {
+    this.editDeviceForm.reset();
     this.editDeviceForm.patchValue(device);
   }
 

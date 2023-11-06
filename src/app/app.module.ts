@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DataTableComponent } from './components/data-table/data-table.component';
+import { EditDeviceComponent } from './components/edit-device/edit-device.component';
 import { GaugeStatusComponent } from './components/gauge-status/gauge-status.component';
-import { EditDeviceComponent } from './edit-device/edit-device.component';
 import { TranslocoRootModule } from './transloco-root.module';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
