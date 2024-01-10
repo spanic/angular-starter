@@ -9,6 +9,8 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/* ================== Bootstrap ===================== */
+
 @import "/node_modules/bootstrap/scss/functions";
 
 /* Add default variable overrides here */
@@ -29,3 +31,7 @@ $enable-dark-mode: false;
 @import "/node_modules/bootstrap/scss/helpers";
 
 @import "/node_modules/bootstrap/scss/utilities/api";
+
+/* ================================================== */
+
+@import "/src/app/styles/status-styles.scss";

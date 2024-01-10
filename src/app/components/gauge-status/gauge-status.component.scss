@@ -1,0 +1,25 @@
+.gauge-status {
+  &-legend {
+    display: flex;
+    column-gap: 1.1rem;
+    row-gap: 0.7rem;
+    flex-wrap: wrap;
+
+    &__item {
+      background-color: var(--bs-gray-100);
+      padding: 6px 18px;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+
+    &-item {
+      &__marker {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 0.7rem;
+        border-radius: 50%;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+$warning-orange: #ffaf3d;
+$error-red: #ff2a04;
+$operational-green: #00e200;
+$offline-blue: #64d9ff;
+$unknown-gray: #7b8089;
+
+$statuses-colors: (
+  "operational": $operational-green,
+  "warning": $warning-orange,
+  "error": $error-red,
+  "offline": $unknown-gray,
+  "unknown": $offline-blue,
+);
+
+@each $status, $color in $statuses-colors {
+  ._#{$status} {
+    &_background-fill {
+      fill: $color;
+    }
+
+    &_background {
+      background-color: $color;
+    }
+  }
+}

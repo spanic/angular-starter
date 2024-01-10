@@ -12,20 +12,7 @@ import { GaugeData } from '../gauge-status/gauge-status.model';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  public gaugeData: GaugeData[] = [
-    {
-      status: 'Operational',
-      qty: 3,
-    },
-    {
-      status: 'Warning',
-      qty: 1,
-    },
-    {
-      status: 'Error',
-      qty: 4,
-    },
-  ];
+  public gaugeData: GaugeData;
 
   public devices: DeviceData[];
 
@@ -38,14 +25,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     combineLatest([
       this.dashboardService.fetchDevicesData(),
-      interval(1000).pipe(
+      interval(2000).pipe(
         startWith(0),
         switchMap(() => this.dashboardService.fetchStatusesData())
       ),
     ])
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(([devices, statuses]: [DeviceData[], StatusesData]) => {
-        this.devices = devices;
+        this.devices = devices.map((device) => {
+          device.status = statuses[device.id];
+          return device;
+        });
+        this.gaugeData = this.dashboardService.groupStatusesByName(statuses);
       });
   }
 

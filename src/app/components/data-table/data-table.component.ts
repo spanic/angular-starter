@@ -4,9 +4,15 @@ import {
   HostBinding,
   Input,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { GridOptions, RowSelectedEvent } from 'ag-grid-community';
+import { AgGridAngular } from 'ag-grid-angular';
+import {
+  GetRowIdParams,
+  GridOptions,
+  RowSelectedEvent,
+} from 'ag-grid-community';
 import { DeviceData } from '../../models/device-data.model';
 
 @Component({
@@ -19,8 +25,21 @@ export class DataTableComponent {
   @HostBinding('class')
   hostElementClass = 'data-table';
 
+  @ViewChild('grid') grid: AgGridAngular;
+
+  private _data: DeviceData[];
+
   @Input()
-  public data: DeviceData[];
+  public set data(data: DeviceData[]) {
+    this._data = data;
+    // manually triggers cells update, without this line AgGrid will update data only if it's scrolled out of the view
+    // or if filtering/sorting applied. I suppose it's because of internal virtualization / change detection logic
+    this.grid?.api.refreshCells();
+  }
+
+  public get data() {
+    return this._data;
+  }
 
   @Output()
   public selectRow = new EventEmitter<DeviceData>();
@@ -45,6 +64,7 @@ export class DataTableComponent {
     rowMultiSelectWithClick: true,
     animateRows: true,
     onRowSelected: (event) => this.onRowSelected(event),
+    getRowId: (params: GetRowIdParams<DeviceData>) => params.data.id,
   };
 
   public onRowSelected(event: RowSelectedEvent<DeviceData>): void {
