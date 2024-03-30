@@ -14,6 +14,7 @@ import {
   RowSelectedEvent,
 } from 'ag-grid-community';
 import { DeviceData } from '../../models/device-data.model';
+import { StatusCellRendererComponent } from '../status-legend-item/status-cell-renderer.component';
 
 @Component({
   selector: 'app-data-table',
@@ -53,7 +54,7 @@ export class DataTableComponent {
       { field: 'macAddress', headerName: 'MAC Address' },
       { field: 'ipAddress', headerName: 'IP Address' },
       { field: 'location' },
-      { field: 'status' },
+      { field: 'status', cellRenderer: StatusCellRendererComponent },
     ],
     defaultColDef: {
       sortable: true,

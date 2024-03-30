@@ -8,16 +8,8 @@ enum Status {
   Unknown = 'Unknown',
 }
 
-const StatusColorMap: { [status: string]: string } = {
-  [Status.Operational]: 'green',
-  [Status.Error]: 'red',
-  [Status.Warning]: 'orange',
-  [Status.Offline]: 'grey',
-  [Status.Unknown]: 'lightblue',
-};
-
 interface StatusesData {
   [id: DeviceData['id']]: Status;
 }
 
-export { Status, StatusesData, StatusColorMap };
+export { Status, StatusesData };

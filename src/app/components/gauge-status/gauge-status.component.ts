@@ -4,10 +4,13 @@ import {
   ElementRef,
   Input,
   ViewChild,
+  ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
 import * as d3 from 'd3';
 import { GaugeData } from './gauge-status.model';
+import { StatusLegendItemComponent } from '../status-legend-item/status-legend-item.component';
+import { Status } from 'src/app/models/statuses-data.model';
 
 /**
  * Base gauge graph parameters
@@ -27,7 +30,10 @@ export class GaugeStatusComponent implements AfterViewInit {
   private _gaugeContainer: ElementRef;
 
   @ViewChild('legendContainer')
-  private _legendContainer: ElementRef;
+  private _legendContainerRef: ElementRef;
+
+  @ViewChild('legendItemsContainer', { read: ViewContainerRef })
+  private _legendItemsContainer: ViewContainerRef;
 
   private _data: GaugeData;
 
@@ -175,29 +181,20 @@ export class GaugeStatusComponent implements AfterViewInit {
       });
   }
 
-  // TODO: create a component for legend items, use Angular ngFor to display them instead of D3.js. Reuse this component inside the AgGrid table as a Cell Renderer for "Status" column
   private _drawLegend(): void {
-    d3.select(this._legendContainer.nativeElement).selectChildren()?.remove();
+    d3.select(this._legendContainerRef.nativeElement)
+      .selectChildren()
+      ?.remove();
 
-    const legendItems = d3
-      .select(this._legendContainer.nativeElement)
+    d3.select(this._legendContainerRef.nativeElement)
       .selectAll()
       .data(Object.entries(this.data))
-      .join('div')
-      .attr('class', ([status]) => {
-        return `gauge-status-legend__item _${status.toLowerCase()}_background`;
+      .enter()
+      .each(([status]) => {
+        const componentRef = this._legendItemsContainer.createComponent(
+          StatusLegendItemComponent
+        );
+        componentRef.instance.status = status as Status;
       });
-
-    legendItems
-      .append('div')
-      .classed('gauge-status-legend-item__marker', true)
-      .attr('class', ([status], i, groups) =>
-        [
-          ...Array(groups[i].classList),
-          `_${status.toLowerCase()}_background`,
-        ].join(' ')
-      );
-
-    legendItems.append('span').text(([status]) => status);
   }
 }
