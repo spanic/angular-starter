@@ -7,7 +7,7 @@ export class DevicesDataController {
   constructor(private readonly appService: DevicesDataService) {}
 
   @Get()
-  getDevicesData(): DeviceData[] {
-    return this.appService.getDevicesData();
+  async getDevicesData(): Promise<DeviceData[]> {
+    return await this.appService.getDevicesData();
   }
 }

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DevicesDataController } from './devices-data.controller';
 import { DevicesDataService } from './devices-data.service';
-import { devicesData } from '../shared/data/devices-data';
+import { devicesData } from '../data/devices-data';
 
 describe('DevicesDataController', () => {
   let devicesDataController: DevicesDataController;

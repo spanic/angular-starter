@@ -2,7 +2,7 @@ import { DeviceData, Status } from 'src/shared/models/device-data.model';
 
 export const devicesData: DeviceData[] = [
   {
-    id: 'c35b24d5-69ac-40c5-9591-9da525190b04',
+    id: null,
     name: 'Router A',
     manufacturer: 'Cisco',
     model: 'ASR-1000',
@@ -14,7 +14,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Operational,
   },
   {
-    id: '98758af7-aabd-42e5-bd0d-0cfeea23ff00',
+    id: null,
     name: 'Switch 1',
     manufacturer: 'Dell',
     model: 'PowerConnect 6248P',
@@ -26,7 +26,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Warning,
   },
   {
-    id: '64d20ce3-97b1-4ce0-ae22-f35aae78bb61',
+    id: null,
     name: 'Firewall X',
     manufacturer: 'Fortinet',
     model: 'FortiGate 400E',
@@ -38,7 +38,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Warning,
   },
   {
-    id: '3c7b8df1-509f-4e8e-9d5d-4fb7f6a22479',
+    id: null,
     name: 'Switch 2',
     manufacturer: 'HP',
     model: 'ProCurve 5406zl',
@@ -50,7 +50,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Error,
   },
   {
-    id: '9e4c7b3f-99a8-497f-babb-d8661d929ae1',
+    id: null,
     name: 'Router B',
     manufacturer: 'Juniper',
     model: 'MX480',
@@ -62,7 +62,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Offline,
   },
   {
-    id: '1a2b3c4d-6a2f-46cc-97ca-eedf24ffbd82',
+    id: null,
     name: 'Switch 3',
     manufacturer: 'Aruba',
     model: '7240',
@@ -74,7 +74,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Operational,
   },
   {
-    id: '5f6e7d8c-472c-4f4b-a422-6bafeca4c4e7',
+    id: null,
     name: 'Firewall Y',
     manufacturer: 'Palo Alto Networks',
     model: 'PA-220',
@@ -86,7 +86,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Unknown,
   },
   {
-    id: 'a1b2c3d4-809b-40de-9942-e1863d1cfa95',
+    id: null,
     name: 'Router C',
     manufacturer: 'HPE',
     model: 'Aruba 3810M',
@@ -98,7 +98,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Operational,
   },
   {
-    id: '1e2d3c4b-d831-478a-9aef-05a33e1b1c75',
+    id: null,
     name: 'Switch 4',
     manufacturer: 'Brocade',
     model: 'VDX 6740',
@@ -110,7 +110,7 @@ export const devicesData: DeviceData[] = [
     status: Status.Error,
   },
   {
-    id: '9a8b7c6d-3ea6-4819-84f4-3d5d8e9fa0b1',
+    id: null,
     name: 'Router D',
     manufacturer: 'Extreme Networks',
     model: 'X670-G2',
