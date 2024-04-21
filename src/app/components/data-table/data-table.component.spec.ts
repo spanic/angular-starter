@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
 
 describe('DataTableComponent', () => {
@@ -8,6 +9,7 @@ describe('DataTableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [DataTableComponent],
     });
     fixture = TestBed.createComponent(DataTableComponent);

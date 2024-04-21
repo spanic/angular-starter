@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatusLegendItemComponent } from './status-legend-item.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Status } from 'src/app/models/statuses-data.model';
+import { StatusLegendItemComponent } from './status-legend-item.component';
 
 describe('StatusLegendItemComponent', () => {
   let component: StatusLegendItemComponent;
@@ -9,6 +10,7 @@ describe('StatusLegendItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [StatusLegendItemComponent],
     });
     fixture = TestBed.createComponent(StatusLegendItemComponent);

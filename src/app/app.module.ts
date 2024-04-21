@@ -14,8 +14,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { EditDeviceComponent } from './components/edit-device/edit-device.component';
 import { GaugeStatusComponent } from './components/gauge-status/gauge-status.component';
-import { StatusLegendItemComponent } from './components/status-legend-item/status-legend-item.component';
 import { StatusCellRendererComponent } from './components/status-legend-item/status-cell-renderer.component';
+import { StatusLegendItemComponent } from './components/status-legend-item/status-legend-item.component';
 import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
