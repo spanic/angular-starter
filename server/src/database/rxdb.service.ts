@@ -1,84 +1,56 @@
-import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import {
+  Injectable,
+  OnApplicationBootstrap,
+  OnApplicationShutdown,
+} from '@nestjs/common';
 import { RxCollection, RxDatabase, addRxPlugin, createRxDatabase } from 'rxdb';
 import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
 import { getRxStorageMemory } from 'rxdb/plugins/storage-memory';
-import { DeviceData, Status } from '../shared/models/device-data.model';
-import { devicesData } from '../data/devices-data';
 import { v4 as uuidv4 } from 'uuid';
+import { devicesData } from '../data/devices-data';
+import {
+  DeviceData,
+  deviceDataRxDbJsonSchema as schema,
+} from '../shared/models/device-data.model';
 
 @Injectable()
-export class RxDBService implements OnApplicationBootstrap {
-  devicesDB: RxDatabase<{ devices_collection: RxCollection<DeviceData> }>;
+export class RxDBService
+  implements OnApplicationBootstrap, OnApplicationShutdown
+{
+  private static readonly DEVICES_DB_NAME = 'devices_db';
+  private static readonly DEVICES_COLLECTION_NAME = 'devices_collection';
+
+  devicesDb: RxDatabase<{
+    [RxDBService.DEVICES_COLLECTION_NAME]: RxDBService['devicesCollection'];
+  }>;
+
+  devicesCollection: RxCollection<DeviceData>;
+
   async onApplicationBootstrap() {
     addRxPlugin(RxDBDevModePlugin);
 
-    this.devicesDB = await createRxDatabase({
-      name: 'devices_db',
+    this.devicesDb = await createRxDatabase({
+      name: RxDBService.DEVICES_DB_NAME,
       storage: getRxStorageMemory(),
     });
 
-    // TODO: generate JSON Schema automatically via https://github.com/vega/ts-json-schema-generator
-    const deviceSchema = {
-      version: 0,
-      primaryKey: 'id',
-      type: 'object',
-      properties: {
-        id: {
-          type: 'string',
-          maxLength: 100,
-        },
-        name: {
-          type: 'string',
-        },
-        manufacturer: {
-          type: 'string',
-        },
-        model: {
-          type: 'string',
-        },
-        uptime: {
-          type: 'integer',
-          minimum: 0,
-        },
-        firmwareVersion: {
-          type: 'string',
-        },
-        macAddress: {
-          type: 'string',
-        },
-        ipAddress: {
-          type: 'string',
-          format: 'ipv4',
-        },
-        location: {
-          type: 'string',
-        },
-        status: {
-          type: 'string',
-          enum: [
-            Status.Offline,
-            Status.Operational,
-            Status.Warning,
-            Status.Error,
-            Status.Unknown,
-          ],
-        },
-      },
-      required: ['id', 'name'],
-    };
-
-    await this.devicesDB.addCollections({
+    await this.devicesDb.addCollections({
       devices_collection: {
-        schema: deviceSchema,
+        schema,
       },
     });
 
-    const devicesCollection = this.devicesDB['devices_collection'];
+    this.devicesCollection =
+      this.devicesDb[RxDBService.DEVICES_COLLECTION_NAME];
 
-    await devicesCollection.bulkInsert(
+    await this.devicesCollection.bulkInsert(
       devicesData.map((device) => {
         return { ...device, id: uuidv4() };
       })
     );
+  }
+
+  async onApplicationShutdown() {
+    await this.devicesDb.destroy();
   }
 }

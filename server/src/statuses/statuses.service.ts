@@ -10,11 +10,7 @@ export class StatusesService {
   async findAll(): Promise<StatusesData> {
     const enumKeys = Object.keys(Status);
 
-    const devices = await this.rxDbService.devicesDB.collections[
-      'devices_collection'
-    ]
-      .find()
-      .exec();
+    const devices = await this.rxDbService.devicesCollection.find().exec();
 
     const randomizedStatusesData = devices.reduce((acc, deviceData) => {
       const randomEnumKey =
