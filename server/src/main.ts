@@ -1,21 +1,24 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as dotenv from 'dotenv';
 import { AppModule } from './app.module';
+import { SwaggerDocumentBuilder } from './swagger/swagger-document-builder';
 
 async function bootstrap() {
+  dotenv.config();
+
   const app = await NestFactory.create(AppModule, { cors: true });
 
-  const config = new DocumentBuilder()
-    .setTitle('Devices & statuses example')
-    .setDescription('Devices & statuses API description')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-
   app.enableShutdownHooks();
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    })
+  );
 
-  await app.listen(4201);
+  new SwaggerDocumentBuilder(app).build();
+
+  await app.listen(process.env.PORT);
 }
 
 bootstrap();
