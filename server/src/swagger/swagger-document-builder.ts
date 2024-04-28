@@ -28,7 +28,12 @@ export class SwaggerDocumentBuilder {
       .setTitle('Data server')
       .setDescription('### Use Bearer token for authorization ⬇')
       .setVersion('1.0')
-      .addBearerAuth();
+      .addBearerAuth()
+      .addCookieAuth('access_token', {
+        type: 'http',
+        scheme: 'Bearer',
+        in: 'Header',
+      });
 
     Object.values(SWAGGER_TAGS_DEF).forEach(({ name, description }) =>
       config.addTag(name, description)
@@ -45,8 +50,18 @@ export class SwaggerDocumentBuilder {
       this.app,
       document,
       {
-        customCss:
-          '.swagger-ui .information-container .info .description .renderedMarkdown { text-align: end; }',
+        customCss: `
+        .swagger-ui .information-container .info .description .renderedMarkdown {
+          text-align: end;
+        }
+        .swagger-ui .parameters-container .parameters-col_description .parameter__enum,
+        .swagger-ui .parameters-container .parameters-col_description .parameter__default {
+          color: gray;
+          font-family: monospace;
+          font-size: 12px;
+          font-style: italic;
+          font-weight: 600;
+        }`,
       }
     );
   }

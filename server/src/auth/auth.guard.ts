@@ -20,22 +20,34 @@ export class AuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+    const request: Request = context.switchToHttp().getRequest();
+
+    if (this.checkIsPublicRoute(context)) return true;
+    if (this.checkIsTokenValid(request)) return true;
+
+    throw new UnauthorizedException();
+  }
+
+  private checkIsPublicRoute(context: ExecutionContext): boolean {
+    return this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
-    if (isPublic) return true;
+  }
 
-    const request: Request = context.switchToHttp().getRequest();
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    if (type !== 'Bearer' || !token) throw new UnauthorizedException();
+  private checkIsTokenValid(request: Request): boolean {
+    const tokenFromCookie: string | undefined = request.cookies?.access_token;
 
-    try {
-      this.jwtService.verify(token);
-    } catch {
-      throw new UnauthorizedException();
-    }
+    // eslint-disable-next-line prefer-const
+    let [authType, tokenFromAuthHeader] =
+      request.headers.authorization?.split(' ') ?? [];
+    tokenFromAuthHeader =
+      authType === 'Bearer' ? tokenFromAuthHeader : undefined;
 
-    return true;
+    return [tokenFromCookie, tokenFromAuthHeader].some((accessToken) => {
+      try {
+        return !!this.jwtService.verify(accessToken);
+      } catch {}
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCookieAuth, ApiTags } from '@nestjs/swagger';
 import { DeviceData } from 'src/shared/models/device-data.model';
 import { DevicesDataService } from './devices-data.service';
 
@@ -10,6 +10,7 @@ export class DevicesDataController {
 
   @Get()
   @ApiBearerAuth()
+  @ApiCookieAuth()
   async getDevicesData(): Promise<DeviceData[]> {
     return await this.appService.getDevicesData();
   }

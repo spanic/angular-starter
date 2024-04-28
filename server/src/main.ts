@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import * as cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
 import { AppModule } from './app.module';
 import { SwaggerDocumentBuilder } from './swagger/swagger-document-builder';
@@ -15,6 +16,7 @@ async function bootstrap() {
       whitelist: true,
     })
   );
+  app.use(cookieParser());
 
   new SwaggerDocumentBuilder(app).build();
 

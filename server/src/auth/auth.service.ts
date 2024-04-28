@@ -1,21 +1,19 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { EnvironmentVariables } from 'src/shared/models/environment-variables.model';
 
 @Injectable()
 export class AuthService {
-  private readonly DEFAULT_USER_ID = this.configService.get('DEFAULT_USER_ID');
+  private readonly DEFAULT_USER_ID = this.configService.get('defaultUserId');
 
   constructor(
-    private readonly configService: ConfigService,
+    private readonly configService: ConfigService<EnvironmentVariables>,
     private readonly jwtService: JwtService
   ) {}
 
-  login(userId: string): { accessToken: string } {
+  login(userId: string): string {
     if (userId !== this.DEFAULT_USER_ID) throw new UnauthorizedException();
-
-    const accessToken = this.jwtService.sign({ sub: userId });
-
-    return { accessToken };
+    return this.jwtService.sign({ sub: userId });
   }
 }

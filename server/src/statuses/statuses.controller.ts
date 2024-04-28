@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCookieAuth, ApiTags } from '@nestjs/swagger';
 import { StatusesData } from 'src/shared/models/statuses-data.model';
 import { StatusesService } from './statuses.service';
 
@@ -10,6 +10,7 @@ export class StatusesController {
 
   @Get()
   @ApiBearerAuth()
+  @ApiCookieAuth()
   findAll(): Promise<StatusesData> {
     return this.statusesService.findAll();
   }
