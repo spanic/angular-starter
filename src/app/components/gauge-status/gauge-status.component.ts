@@ -8,9 +8,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import * as d3 from 'd3';
-import { GaugeData } from './gauge-status.model';
-import { StatusLegendItemComponent } from '../status-legend-item/status-legend-item.component';
 import { Status } from 'src/app/models/statuses-data.model';
+import { StatusLegendItemComponent } from '../status-legend-item/status-legend-item.component';
+import { GaugeData } from './gauge-status.model';
 
 /**
  * Base gauge graph parameters
@@ -40,7 +40,7 @@ export class GaugeStatusComponent implements AfterViewInit {
   @Input()
   set data(data: GaugeData) {
     this._data = data;
-    this._updateGauge();
+    this._updateGauge(); // TODO: fix this: should be executed only after view init
     this._drawLegend();
   }
 

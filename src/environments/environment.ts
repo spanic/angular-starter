@@ -6,7 +6,7 @@ import { Environment } from 'src/app/models/environment.model';
 
 export const environment: Environment = {
   production: false,
-  baseUrl: '/local-api',
+  baseApiUrl: '/local-api',
 };
 
 /*

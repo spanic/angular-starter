@@ -1,4 +1,4 @@
 export type Environment = {
   production: boolean;
-  baseUrl: string;
+  baseApiUrl: string;
 };

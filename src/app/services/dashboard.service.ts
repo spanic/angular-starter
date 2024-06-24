@@ -17,11 +17,11 @@ export class DashboardService {
   ) {}
 
   fetchDevicesData(): Observable<DeviceData[]> {
-    return this.http.get<DeviceData[]>(`${this.env.baseUrl}/devices`);
+    return this.http.get<DeviceData[]>(`${this.env.baseApiUrl}/devices`);
   }
 
   fetchStatusesData(): Observable<StatusesData> {
-    return this.http.get<StatusesData>(`${this.env.baseUrl}/statuses`);
+    return this.http.get<StatusesData>(`${this.env.baseApiUrl}/statuses`);
   }
 
   groupStatusesByName(statuses: StatusesData): GaugeData {
