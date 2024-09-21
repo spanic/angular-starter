@@ -6,7 +6,7 @@ import { Environment } from 'src/app/models/environment.model';
 
 export const environment: Environment = {
   production: false,
-  baseApiUrl: '/local-api',
+  baseApiUrl: 'https://server.eviterno.online',
 };
 
 /*
