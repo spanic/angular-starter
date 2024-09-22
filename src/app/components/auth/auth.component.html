@@ -1,0 +1,43 @@
+<div
+  class="container py-3 d-flex flex-column justify-content-center min-vh-100"
+>
+  <div class="row">
+    <div class="col col-lg-10 mx-lg-auto col-xl-8">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Authorization</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row row-cols-1">
+            <p class="col">
+              Please enter the token provided to you by your interviewer
+            </p>
+            <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+              <div class="col mb-2">
+                <mat-form-field class="w-100">
+                  <mat-label>Access token</mat-label>
+                  <textarea matInput formControlName="accessToken"></textarea>
+                  <mat-error *ngIf="accessToken?.hasError('required')"
+                    >Value cannot be empty</mat-error
+                  >
+                </mat-form-field>
+              </div>
+              <div class="col auth__actions">
+                <button
+                  class="auth__button_submit"
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="!authForm.valid"
+                  tabindex="0"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

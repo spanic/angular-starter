@@ -1,0 +1,11 @@
+@import "/src/app/styles/mixins";
+
+.auth__actions {
+  text-align: end;
+}
+
+@include media-breakpoint-down(md) {
+  .auth__button_submit {
+    width: 100%;
+  }
+}

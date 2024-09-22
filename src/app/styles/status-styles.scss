@@ -8,8 +8,8 @@ $statuses-colors: (
   "operational": $operational-green,
   "warning": $warning-orange,
   "error": $error-red,
-  "offline": $unknown-gray,
-  "unknown": $offline-blue,
+  "offline": $offline-blue,
+  "unknown": $unknown-gray,
 );
 
 @each $status, $color in $statuses-colors {

@@ -1,9 +1,9 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, interval, startWith, switchMap } from 'rxjs';
+import { DeviceData } from 'src/app/models/device-data.model';
 import { StatusesData } from 'src/app/models/statuses-data.model';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { DeviceData } from 'src/app/models/device-data.model';
 import { GaugeData } from '../gauge-status/gauge-status.model';
 
 @Component({

@@ -51,10 +51,10 @@ export class DataTableComponent {
     rowClass: 'data-table__row',
     columnDefs: [
       { field: 'name' },
+      { field: 'status', cellRenderer: StatusCellRendererComponent },
       { field: 'macAddress', headerName: 'MAC Address' },
       { field: 'ipAddress', headerName: 'IP Address' },
       { field: 'location' },
-      { field: 'status', cellRenderer: StatusCellRendererComponent },
     ],
     defaultColDef: {
       sortable: true,
