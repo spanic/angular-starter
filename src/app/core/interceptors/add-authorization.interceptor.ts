@@ -6,10 +6,10 @@ import {
 } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import ACCESS_TOKEN_STORAGE_KEY from '../shared/authorization.token';
+import { ACCESS_TOKEN_STORAGE_KEY } from '../injection-tokens/authentication.token';
 
 @Injectable()
-export class AuthorizationInterceptor implements HttpInterceptor {
+export class AddAuthorizationInterceptor implements HttpInterceptor {
   constructor(
     @Inject(ACCESS_TOKEN_STORAGE_KEY)
     private readonly accessTokenStorageKey: string

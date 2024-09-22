@@ -4,7 +4,7 @@ import {
   HostBinding,
   Input,
 } from '@angular/core';
-import { Status } from 'src/app/models/statuses-data.model';
+import { Status } from 'src/app/dashboard/shared/statuses-data.model';
 
 @Component({
   selector: 'app-status-legend-item',

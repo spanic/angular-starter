@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Status } from 'src/app/models/statuses-data.model';
+import { Status } from 'src/app/dashboard/shared/statuses-data.model';
 import { StatusLegendItemComponent } from './status-legend-item.component';
 
 describe('StatusLegendItemComponent', () => {

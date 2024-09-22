@@ -13,7 +13,7 @@ import {
   GridOptions,
   RowSelectedEvent,
 } from 'ag-grid-community';
-import { DeviceData } from '../../models/device-data.model';
+import { DeviceData } from '../shared/device-data.model';
 import { StatusCellRendererComponent } from '../status-legend-item/status-cell-renderer.component';
 
 @Component({

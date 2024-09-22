@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { StatusLegendItemComponent } from './status-legend-item.component';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
-import { DeviceData } from 'src/app/models/device-data.model';
-import { Status } from 'src/app/models/statuses-data.model';
+import { DeviceData } from 'src/app/dashboard/shared/device-data.model';
+import { Status } from 'src/app/dashboard/shared/statuses-data.model';
+import { StatusLegendItemComponent } from './status-legend-item.component';
 
 @Component({
   selector: 'app-status-cell-renderer',
