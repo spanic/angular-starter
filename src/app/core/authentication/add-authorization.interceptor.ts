@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ACCESS_TOKEN_STORAGE_KEY } from '../injection-tokens/authentication.token';
+import { ACCESS_TOKEN_STORAGE_KEY } from './authentication.token';
 
 @Injectable()
 export class AddAuthorizationInterceptor implements HttpInterceptor {

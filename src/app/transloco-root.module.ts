@@ -9,8 +9,8 @@ import {
   translocoConfig,
 } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
-import ENVIRONMENT from './core/injection-tokens/environment.token';
-import { Environment } from './core/models/environment.model';
+import { Environment } from './core/environment/environment.model';
+import ENVIRONMENT from './core/environment/environment.token';
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {

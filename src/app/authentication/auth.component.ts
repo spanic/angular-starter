@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ACCESS_TOKEN_STORAGE_KEY } from '../core/injection-tokens/authentication.token';
-import { NavigationHelperSevice } from '../core/services/navigation-helper.service';
+import { ACCESS_TOKEN_STORAGE_KEY } from '../core/authentication/authentication.token';
+import { NavigationHelperSevice } from '../core/navigation/navigation-helper.service';
 
 @Component({
   selector: 'app-auth',

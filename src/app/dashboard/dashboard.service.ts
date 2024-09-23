@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import ENVIRONMENT from '../core/injection-tokens/environment.token';
-import { Environment } from '../core/models/environment.model';
+import { Environment } from '../core/environment/environment.model';
+import ENVIRONMENT from '../core/environment/environment.token';
 import { GaugeData } from './gauge-status/gauge-status.model';
 import { DeviceData } from './shared/device-data.model';
 import { StatusesData } from './shared/statuses-data.model';

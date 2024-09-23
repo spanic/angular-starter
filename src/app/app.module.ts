@@ -13,8 +13,8 @@ import { RouterOutlet, provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
 import routes from './app.routes';
 import { AuthModule } from './authentication/auth.module';
-import { AddAuthorizationInterceptor } from './core/interceptors/add-authorization.interceptor';
-import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interceptor';
+import { AddAuthorizationInterceptor } from './core/authentication/add-authorization.interceptor';
+import { UnauthorizedInterceptor } from './core/authentication/unauthorized.interceptor';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TranslocoRootModule } from './transloco-root.module';
 
