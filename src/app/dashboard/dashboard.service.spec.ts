@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DashboardService } from './dashboard.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardService } from './dashboard.service';
 
 describe('DashboardService', () => {
   let service: DashboardService;
@@ -9,6 +9,7 @@ describe('DashboardService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
+      providers: [DashboardService],
     });
     service = TestBed.inject(DashboardService);
   });

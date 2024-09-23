@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GaugeData } from '../components/gauge-status/gauge-status.model';
-import { DeviceData } from '../models/device-data.model';
-import { Environment } from '../models/environment.model';
-import { StatusesData } from '../models/statuses-data.model';
-import ENVIRONMENT from '../shared/environment.token';
+import { Environment } from '../core/environment/environment.model';
+import ENVIRONMENT from '../core/environment/environment.token';
+import { GaugeData } from './gauge-status/gauge-status.model';
+import { DeviceData } from './shared/device-data.model';
+import { StatusesData } from './shared/statuses-data.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class DashboardService {
   constructor(
     @Inject(ENVIRONMENT) private env: Environment,

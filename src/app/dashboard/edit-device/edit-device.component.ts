@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DeviceData } from '../../models/device-data.model';
+import { DeviceData } from '../shared/device-data.model';
 
 @Component({
   selector: 'app-edit-device',

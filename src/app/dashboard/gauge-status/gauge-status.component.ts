@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import * as d3 from 'd3';
-import { Status } from 'src/app/models/statuses-data.model';
+import { Status } from 'src/app/dashboard/shared/statuses-data.model';
 import { StatusLegendItemComponent } from '../status-legend-item/status-legend-item.component';
 import { GaugeData } from './gauge-status.model';
 

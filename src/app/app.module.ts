@@ -1,63 +1,41 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import {
-  MAT_FORM_FIELD_DEFAULT_OPTIONS,
-  MatFormFieldModule,
-} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet, provideRouter } from '@angular/router';
-import { AgGridModule } from 'ag-grid-angular';
 import { AppComponent } from './app.component';
 import routes from './app.routes';
-import { AuthComponent } from './components/auth/auth.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DataTableComponent } from './components/data-table/data-table.component';
-import { EditDeviceComponent } from './components/edit-device/edit-device.component';
-import { GaugeStatusComponent } from './components/gauge-status/gauge-status.component';
-import { StatusCellRendererComponent } from './components/status-legend-item/status-cell-renderer.component';
-import { StatusLegendItemComponent } from './components/status-legend-item/status-legend-item.component';
-import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
-import { UnauthorizedInterceptor } from './interceptors/unauthorized.interceptor';
+import { AuthModule } from './authentication/auth.module';
+import { AddAuthorizationInterceptor } from './core/authentication/add-authorization.interceptor';
+import { UnauthorizedInterceptor } from './core/authentication/unauthorized.interceptor';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    GaugeStatusComponent,
-    DataTableComponent,
-    EditDeviceComponent,
-    StatusLegendItemComponent,
-    StatusCellRendererComponent,
-    AuthComponent,
-  ],
   imports: [
-    RouterOutlet,
     BrowserModule,
+    RouterOutlet,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     TranslocoRootModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    AgGridModule,
     MatSnackBarModule,
+    DashboardModule,
+    AuthModule,
   ],
+  declarations: [AppComponent],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,
@@ -65,12 +43,8 @@ import { TranslocoRootModule } from './transloco-root.module';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthorizationInterceptor,
+      useClass: AddAuthorizationInterceptor,
       multi: true,
-    },
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline' },
     },
   ],
   bootstrap: [AppComponent],
